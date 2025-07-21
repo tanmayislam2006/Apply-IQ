@@ -11,7 +11,7 @@ const firebaseConfig = {
   projectId: "applyiq-app11",
   storageBucket: "applyiq-app11.firebasestorage.app",
   messagingSenderId: "1036524286291",
-  appId: "1:1036524286291:web:f2b951a784ac1448c371a6"
+  appId: "1:1036524286291:web:6c0c577a1d457b2cc371a6"
 };
 
 // Initialize Firebase
