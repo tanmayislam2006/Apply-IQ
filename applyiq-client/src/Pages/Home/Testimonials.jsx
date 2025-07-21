@@ -13,13 +13,13 @@ const testimonials = [
     img: "https://i.ibb.co/sdTfWPM4/aditya.webp",
   },
   {
-    name: "Sumiya Shajuti",
+    name: "Aditya Roy",
     message:
       "The job tracking and email reminders keep me organized and on top of my applications.",
     img: "https://i.ibb.co/rGd84fSj/daniel.webp",
   },
   {
-    name: "Aditya Roy",
+    name: "Maya Naura",
     message:
       "Scheduling interviews synced with Google Calendar is a game-changer for my workflow.",
     img: "https://i.ibb.co/gZYkv893/naura.webp",
