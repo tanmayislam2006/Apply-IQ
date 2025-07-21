@@ -5,9 +5,10 @@ import Notification from "./Notification";
 import { FaSignInAlt } from "react-icons/fa";
 import ApplyIQ from "../ApplyIQ/ApplyIQ";
 import UserDropdown from "./UserDropdown";
+import useAuthProvider from "../../Hooks/useAuthProvider";
 
 const Navbar = () => {
-  const firebaseUser = null; // Replace with actual user state from context or state management
+  const {firebaseUser} = useAuthProvider(); // Replace with actual user state from context or state management
   const links = [
     { name: "Home", to: "/", icon: <FiHome size={22} /> },
     { name: "Contact", to: "/contact", icon: <FiMail size={22} /> },

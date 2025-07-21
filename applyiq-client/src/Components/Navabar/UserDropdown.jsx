@@ -1,13 +1,9 @@
 import { Link } from "react-router";
-
-
+import useAuthProvider from "../../Hooks/useAuthProvider";
 
 const UserDropdown = ({ links }) => {
-  const user=null; 
-    const logoutUser = () => {
-        // Logic to handle user logout
-        console.log("User logged out");
-    };
+  const { user, logoutUser } = useAuthProvider();
+
   return (
     <div className="dropdown dropdown-end mr-5">
       <div
@@ -16,7 +12,11 @@ const UserDropdown = ({ links }) => {
         className="btn btn-ghost btn-circle avatar relative group"
       >
         <div className="w-10 rounded-full">
-          <img alt="user" src={user?.profileImage} referrerPolicy="no-referrer" />
+          <img
+            alt="user"
+            src={user?.profileImage}
+            referrerPolicy="no-referrer"
+          />
         </div>
         <p className="absolute left-1/2 -translate-x-1/2 -bottom-10  bg-gray-800 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap z-50">
           {user?.name}

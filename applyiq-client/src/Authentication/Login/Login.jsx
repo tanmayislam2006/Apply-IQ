@@ -23,16 +23,11 @@ const Login = () => {
     try {
       const result = await loginUser(email, password);
       if (result.user) {
-        toast.success("Login successful");
+        toast.success("User logged in successfully");
         navigate(location?.state || "/");
       }
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Login Failed",
-        text: error.message,
-        confirmButtonColor: "#4FC3F7",
-      });
+      toast.error(`Login failed: ${error.message}`);
     }
   };
 
@@ -77,6 +72,7 @@ const Login = () => {
             type={showPass ? "text" : "password"}
             id="password"
             name="password"
+            defaultValue={"123456Aa@"}
             placeholder="Enter your password"
             className="w-full px-4 py-3 rounded-lg border border-primary/20 focus:outline-none focus:border-primary"
             required
