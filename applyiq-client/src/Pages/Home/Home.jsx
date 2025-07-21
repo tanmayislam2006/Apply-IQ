@@ -12,7 +12,7 @@ import FAQ from "./FAQ";
 
 const Home = () => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto px-4">
       {/* 1. Strong headline, CTA, maybe animated preview */}
       <HeroSection />
       {/* 2. Simple 3-step explanation: Add > Analyze > Track */}

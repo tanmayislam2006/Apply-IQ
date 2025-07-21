@@ -1,13 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router';
+import Footer from '../Components/Footer/Footer';
 
 const MainLayout = () => {
     return (
-        <main className='max-w-7xl mx-auto px-4'>
+        <main className=''>
           <div className="h-min-[calc(100vh-200px)] ">
             <Outlet />
           </div>
-          
+          <Footer/>
         </main>
     );
 };
