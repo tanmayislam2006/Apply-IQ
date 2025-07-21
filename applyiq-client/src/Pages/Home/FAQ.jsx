@@ -1,7 +1,7 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { FiChevronDown } from "react-icons/fi";
-
+import FAQimage from "../../assets/FAQ.png"
 const faqs = [
   {
     question: "What is ApplyIQ?",
@@ -46,7 +46,7 @@ const FAQ = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-primary mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-montserrat  mb-4">
             Frequently Asked Questions
           </h2>
           <p className="text-lg font-openSans opacity-90 max-w-2xl mx-auto">
@@ -54,30 +54,40 @@ const FAQ = () => {
           </p>
         </div>
 
-        {/* FAQ Accordion */}
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <Disclosure key={index}>
-              {({ open }) => (
-                <div className="border border-primary/10 rounded-xl overflow-hidden">
-                  <Disclosure.Button
-                    className="flex w-full justify-between items-center px-6 py-4 bg-white hover:bg-primary/5 transition font-semibold text-left font-montserrat text-primary cursor-pointer"
-                  >
-                    <span>{faq.question}</span>
-                    <FiChevronDown
-                      className={`transition-transform duration-300 ${
-                        open ? "rotate-180" : "cursor-pointer"
-                      }`}
-                      size={24}
-                    />
-                  </Disclosure.Button>
-                  <Disclosure.Panel className="px-6 py-4 bg-primary/5 font-openSans opacity-90">
-                    {faq.answer}
-                  </Disclosure.Panel>
-                </div>
-              )}
-            </Disclosure>
-          ))}
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+          {/* Left: FAQ Accordion */}
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <Disclosure key={index}>
+                {({ open }) => (
+                  <div className="border border-primary/10 rounded-xl overflow-hidden">
+                    <Disclosure.Button className="flex w-full justify-between items-center px-6 py-4 bg-white hover:bg-primary/5 transition font-semibold text-left font-montserrat text-primary cursor-pointer">
+                      <span>{faq.question}</span>
+                      <FiChevronDown
+                        className={`transition-transform duration-300 ${
+                          open ? "rotate-180" : ""
+                        }`}
+                        size={24}
+                      />
+                    </Disclosure.Button>
+                    <Disclosure.Panel className="px-6 py-4 bg-primary/5 font-openSans opacity-90">
+                      {faq.answer}
+                    </Disclosure.Panel>
+                  </div>
+                )}
+              </Disclosure>
+            ))}
+          </div>
+
+          {/* Right: Image */}
+          <div className="flex justify-center">
+            <img
+              src={FAQimage}
+              alt="FAQs illustration"
+              className="w-full max-w-sm md:max-w-md lg:max-w-lg animate-fade-in"
+            />
+          </div>
         </div>
       </div>
     </section>
