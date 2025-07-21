@@ -6,9 +6,8 @@ import { FaSignInAlt } from "react-icons/fa";
 import ApplyIQ from "../ApplyIQ/ApplyIQ";
 import UserDropdown from "./UserDropdown";
 
-
 const Navbar = () => {
-    const firebaseUser = null; // Replace with actual user state from context or state management
+  const firebaseUser = null; // Replace with actual user state from context or state management
   const links = [
     { name: "Home", to: "/", icon: <FiHome size={22} /> },
     { name: "Contact", to: "/contact", icon: <FiMail size={22} /> },
@@ -25,26 +24,26 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-6 py-1  max-w-7xl mx-auto  ">
           {/* Left: Logo */}
 
-            <ApplyIQ/>
+          <ApplyIQ />
           {/* Center: Links */}
-          <div className="hidden lg:flex space-x-4">
-            {links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={({ isActive }) =>
-                  `font-montserrat font-medium px-3 py-2 rounded-full transition ${
-                    isActive ? "bg-primary text-white" : ""
-                  }`
-                }
-              >
-                {link.name}
-              </NavLink>
-            ))}
-          </div>
 
           {/* Right: Utilities */}
           <div className="flex items-center space-x-6 md:space-x-16">
+            <div className="hidden lg:flex space-x-4">
+              {links.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `font-montserrat font-medium px-3 py-2 rounded-2xl transition ${
+                      isActive ? "text-primary font-extrabold underline" : ""
+                    }`
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+            </div>
             <ThemeToggle />
 
             {/* Notification */}
