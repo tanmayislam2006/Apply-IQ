@@ -20,7 +20,7 @@ const HeroSection = () => {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto  py-20  flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+      <div className="max-w-7xl mx-auto py-12 flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
