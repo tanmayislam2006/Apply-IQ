@@ -49,7 +49,7 @@ const WhoItsFor = () => {
         transition={{ duration: 0.6 }}
         className="text-3xl font-bold text-[#0D1B2A] text-center mb-12"
       >
-        Who It’s For
+        Who It's For
       </motion.h2>
 
       <motion.div
