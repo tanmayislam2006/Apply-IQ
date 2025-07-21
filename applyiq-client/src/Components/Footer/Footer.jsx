@@ -5,6 +5,7 @@ import {
   FaLinkedinIn,
   FaTwitter,
 } from "react-icons/fa";
+import ApplyIQ from "../ApplyIQ/ApplyIQ";
 
 
 const Footer = () => {
@@ -13,9 +14,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
         {/* Brand & Copyright */}
         <div className="text-center md:text-left">
-            <h1 className="text-2xl font-bold font-montserrat text-primary">
-                ApplyIQ
-            </h1>
+          <ApplyIQ/>
           <p className=" text-sm mt-1">
             &copy; {new Date().getFullYear()} ApplyIQ. All rights
             reserved.
