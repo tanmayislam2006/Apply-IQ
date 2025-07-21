@@ -88,19 +88,6 @@ const ProductPreviewSection = () => {
     </motion.div>
   );
 
-  const renderArrows = (stepsArray) => (
-    <>
-      {stepsArray.map((_, idx) =>
-        idx !== stepsArray.length - 1 ? (
-          <FaArrowDown
-            key={"arrow-" + idx}
-            className="text-primary w-5 h-5 mx-auto my-3 animate-bounce-slow"
-            aria-hidden="true"
-          />
-        ) : null
-      )}
-    </>
-  );
 
   return (
     <section className="bg-white py-20 ">
@@ -129,7 +116,7 @@ const ProductPreviewSection = () => {
               {renderStep(step, idx)}
               {idx !== leftSteps.length - 1 && (
                 <FaArrowDown
-                  className="text-primary w-5 h-5 mx-auto my-3 animate-bounce-slow"
+                  className="text-primary w-5 h-5 mx-auto my-3 animate-bounce"
                   aria-hidden="true"
                 />
               )}
@@ -150,7 +137,7 @@ const ProductPreviewSection = () => {
               {renderStep(step, idx)}
               {idx !== rightSteps.length - 1 && (
                 <FaArrowDown
-                  className="text-primary w-5 h-5 mx-auto my-3 animate-bounce-slow"
+                  className="text-primary w-5 h-5 mx-auto my-3 animate-bounce"
                   aria-hidden="true"
                 />
               )}
