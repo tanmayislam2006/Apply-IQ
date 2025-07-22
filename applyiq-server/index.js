@@ -6,11 +6,8 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 app.use(cors());
 app.use(express.json());
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.7v7xhww.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.kn8r7rw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-app.get("/", (req, res) => {
-  res.send("Hello server");
-});
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -18,16 +15,33 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
-
-
+app.get("/", (req, res) => {
+  res.send("Hello server");
+});
 async function run() {
   try {
-    await client.connect();
+    //  create a connection to the MongoDB cluster
+    const ApplyIQ = client.db("ApplyIQ");
+    const usersCollection = ApplyIQ.collection("users");
+    // get user information
+    app.get("/user/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const user = await usersCollection.findOne(query);
+      res.send(user);
+    });
+    // register user data
+    app.post("/register", async (req, res) => {
+      const user = req.body;
+      const result = await usersCollection.insertOne(user);
+      res.send(result);
+    });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
   } finally {
-
   }
 }
 run().catch(console.dir);
