@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash, FaUserCircle } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAuthProvider from "../../Hooks/useAuthProvider";
@@ -18,6 +18,7 @@ const Register = () => {
   const [showPass, setShowPass] = useState(false);
   const [preview, setPreview] = useState(defaultAvatar);
   const [image, setImage] = useState(null);
+    const location = useLocation();
 
   const {
     register,
@@ -59,10 +60,10 @@ const Register = () => {
           email: data.email,
           profileImage: image || defaultAvatar,
         };
-        await axiosInstance.post("/register", { profileInfo });
+        console.log(profileInfo);
         await refetchUserData();
         toast.success("Account created successfully");
-        navigate("/");
+        navigate(location?.state || "/");
       }
     } catch (err) {
       toast.error(err?.message || "Something went wrong");
@@ -80,7 +81,7 @@ const Register = () => {
         };
         await refetchUserData();
         toast.success("Logged in with Google");
-        navigate("/");
+       navigate(location?.state || "/");
       }
     } catch {
       toast.error("Google login failed");
