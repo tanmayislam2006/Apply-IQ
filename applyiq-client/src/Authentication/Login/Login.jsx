@@ -41,6 +41,9 @@ const Login = () => {
           name: res.user.displayName,
           email: res.user.email,
           profileImage: res.user.photoURL,
+          service_plan: "free",
+          isVerified: false,
+          role: "user",
           createdAt: new Date().toISOString(),
         };
         await axiosInstance.post("/register", profileInfo);

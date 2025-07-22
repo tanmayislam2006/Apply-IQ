@@ -59,6 +59,9 @@ const Register = () => {
           name: data.fullName,
           email: data.email,
           profileImage: image || defaultAvatar,
+          service_plan: "free",
+          role: "user",
+          isVerified: false,
           createdAt: new Date().toISOString(),
         };
         await axiosInstance.post("/register", profileInfo);
@@ -79,6 +82,9 @@ const Register = () => {
           name: res.user.displayName,
           email: res.user.email,
           profileImage: res.user.photoURL,
+          service_plan: "free",
+          role: "user",
+          isVerified: false,
           createdAt: new Date().toISOString(),
         };
         await axiosInstance.post("/register", profileInfo);

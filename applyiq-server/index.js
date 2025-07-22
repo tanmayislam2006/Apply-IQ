@@ -24,7 +24,7 @@ async function run() {
   try {
     //  create a connection to the MongoDB cluster
     const ApplyIQ = client.db("ApplyIQ");
-    const usersCollection = ApplyIQ.collection("users");
+    const usersCollection = ApplyIQ.collection("Users");
     // get user information
     app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
