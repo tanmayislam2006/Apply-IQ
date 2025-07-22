@@ -7,9 +7,7 @@ const useUserProfile = (email) => {
     queryKey: ["userProfile", email],
     enabled: !!email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/user/${email}`, {
-        withCredentials: true,
-      });
+      const res = await axiosSecure.get(`/user/${email}`);
       return res.data;
     },
   });

@@ -6,9 +6,11 @@ import useAuthProvider from "../../Hooks/useAuthProvider";
 
 import Swal from "sweetalert2";
 import { toast } from "react-hot-toast";
+import useAxios from "../../Hooks/useAxios";
 
 const Login = () => {
-  const { loginUser, googleLogin } = useAuthProvider();
+  const { loginUser, googleLogin, refetchUserData } = useAuthProvider();
+  const axiosInstance = useAxios();
   const [showPass, setShowPass] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,21 +33,24 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then(async (result) => {
-        if (result.user) {
-          navigate(location?.state || "/");
-        }
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Google Login Failed",
-          text: error.message,
-          confirmButtonColor: "#4FC3F7",
-        });
-      });
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await googleLogin();
+      if (res?.user) {
+        const profileInfo = {
+          name: res.user.displayName,
+          email: res.user.email,
+          profileImage: res.user.photoURL,
+          createdAt: new Date().toISOString(),
+        };
+        await axiosInstance.post("/register", profileInfo);
+        await refetchUserData();
+        toast.success("Logged in with Google");
+        navigate(location?.state || "/");
+      }
+    } catch {
+      toast.error("Google login failed");
+    }
   };
   return (
     <div className="max-w-md w-full border-2 border-primary/20 rounded-2xl shadow-lg p-8 flex flex-col items-center">

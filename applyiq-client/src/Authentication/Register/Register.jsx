@@ -59,8 +59,9 @@ const Register = () => {
           name: data.fullName,
           email: data.email,
           profileImage: image || defaultAvatar,
+          createdAt: new Date().toISOString(),
         };
-        console.log(profileInfo);
+        await axiosInstance.post("/register", profileInfo);
         await refetchUserData();
         toast.success("Account created successfully");
         navigate(location?.state || "/");
@@ -78,7 +79,9 @@ const Register = () => {
           name: res.user.displayName,
           email: res.user.email,
           profileImage: res.user.photoURL,
+          createdAt: new Date().toISOString(),
         };
+        await axiosInstance.post("/register", profileInfo);
         await refetchUserData();
         toast.success("Logged in with Google");
        navigate(location?.state || "/");

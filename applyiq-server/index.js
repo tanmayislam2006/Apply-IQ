@@ -4,7 +4,9 @@ const cors = require("cors");
 const port = process.env.PORT || 5000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173"],
+}));
 app.use(express.json());
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.7v7xhww.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
@@ -32,7 +34,13 @@ async function run() {
     });
     // register user data
     app.post("/register", async (req, res) => {
+      // make a vaildation that same email does not exist
+      const email = req.body.email;
       const user = req.body;
+      const existingUser = await usersCollection.findOne({ email: email });
+      if (existingUser) {
+        return res.status(400).send({ message: "User already exists" });
+      }
       const result = await usersCollection.insertOne(user);
       res.send(result);
     });
