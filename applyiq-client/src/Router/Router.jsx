@@ -6,6 +6,8 @@ import About from "../Pages/About/About";
 import AuthenticaionLayout from "../Layout/AuthenticaionLayout";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
+import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
+import PrivateRouter from "./PrivateRouter";
 
 const router =createBrowserRouter([
     {
@@ -39,6 +41,10 @@ const router =createBrowserRouter([
                 element: <Register />
             }
         ]
+    },
+    {
+        path:"/dashboard",
+        element: <PrivateRouter><DashboardLayout /></PrivateRouter>,
     }
 ])
 export default router;
