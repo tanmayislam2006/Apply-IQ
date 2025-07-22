@@ -5,6 +5,7 @@ import {
   FaTimes,
   FaAngleRight,
   FaAngleLeft,
+  FaPlus,
 } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import classNames from "classnames";
@@ -17,6 +18,7 @@ const Sidebar = ({ isMobileOpen, setIsMobileOpen }) => {
   const routes = [
     { path: "/dashboard", label: "Home", icon: <FaHome />, end: true },
     { path: "/dashboard/profile", label: "Profile", icon: <FaUser /> },
+    { path: "/dashboard/addJob", label: "Add Job", icon: <FaPlus /> },
   ];
 
   const linkBaseStyle =

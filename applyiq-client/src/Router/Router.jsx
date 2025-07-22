@@ -9,6 +9,7 @@ import Register from "../Authentication/Register/Register";
 import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
 import PrivateRouter from "./PrivateRouter";
 import Profile from "../Pages/Dashboard/User/Profile/Profile";
+import AddJob from "../Pages/Dashboard/User/AddJob/AddJob";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/profile",
         element: <Profile />,
+      },
+      {
+        path: "/dashboard/addJob",
+        element: <AddJob />,
       },
     ],
   },
