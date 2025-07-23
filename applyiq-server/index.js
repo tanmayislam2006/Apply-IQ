@@ -43,6 +43,13 @@ async function run() {
       const jobs = await jobsCollection.find(query).toArray();
       res.send(jobs);
     });
+    // get a specific job by id
+    app.get("/appliedJobs/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const job = await jobsCollection.findOne(query);
+      res.send(job);
+    });
     // register user data
     app.post("/register", async (req, res) => {
       // make a vaildation that same email does not exist
@@ -59,6 +66,17 @@ async function run() {
     app.post("/appliedJobs", async (req, res) => {
       const jobData = req.body;
       const result = await jobsCollection.insertOne(jobData);
+      res.send(result);
+    });
+    // update a job with id
+    app.patch("/appliedJobs/:id", async (req, res) => {
+      const id = req.params.id;
+      const jobData = req.body;
+      const query = { _id: new ObjectId(id) };
+      const updateDoc = {
+        $set: jobData,
+      };
+      const result = await jobsCollection.updateOne(query, updateDoc);
       res.send(result);
     });
     // delete a applied job

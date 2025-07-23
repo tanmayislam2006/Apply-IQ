@@ -5,11 +5,11 @@ import { FaTimes } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 
 const statusColors = {
-  wishlist: "bg-yellow-100 text-yellow-800",
-  applied: "bg-blue-100 text-blue-800",
-  interview: "bg-green-100 text-green-800",
-  offer: "bg-green-100 text-green-800",
-  rejected: "bg-red-100 text-red-800",
+  wishlist: "bg-yellow-100 text-yellow-800 border border-yellow-300",
+  applied: "bg-blue-100 text-blue-800 border border-blue-300",
+  interview: "bg-purple-100 text-purple-800 border border-purple-300",
+  offer: "bg-green-100 text-green-800 border border-green-300",
+  rejected: "bg-red-100 text-red-800 border border-red-300",
 };
 
 const JobDetailsModal = ({ job, onClose }) => {

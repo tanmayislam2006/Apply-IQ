@@ -11,6 +11,7 @@ import PrivateRouter from "./PrivateRouter";
 import Profile from "../Pages/Dashboard/User/Profile/Profile";
 import AddJob from "../Pages/Dashboard/User/AddJob/AddJob";
 import AppliedJob from "../Pages/Dashboard/User/AppliedJob/AppliedJob";
+import EditApplyJob from "../Pages/Dashboard/User/AppliedJob/EditApplyJob";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/appliedJob",
         element: <AppliedJob />,
+      },
+      {
+        path: "/dashboard/editJob/:id",
+        element: <EditApplyJob />,
       },
     ],
   },

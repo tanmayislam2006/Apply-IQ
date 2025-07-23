@@ -8,12 +8,14 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import JobDetailsModal from "./JobDetailsModal ";
+import { useNavigate } from "react-router";
 
 const AppliedJob = () => {
   const { user } = useAuthProvider();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
   const [selectedJob, setSelectedJob] = useState(null);
+  const navigate = useNavigate();
   // fetch applied jobs for the user
   const {
     data: appliedJobs = [],
@@ -42,7 +44,7 @@ const AppliedJob = () => {
     },
   });
   const handleEdit = (id) => {
-    toast(`Edit job: ${id}`);
+   navigate(`/dashboard/editJob/${id}`);
   };
 
   const handleDelete = async (id) => {
