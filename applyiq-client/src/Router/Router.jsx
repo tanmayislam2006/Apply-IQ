@@ -10,6 +10,7 @@ import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
 import PrivateRouter from "./PrivateRouter";
 import Profile from "../Pages/Dashboard/User/Profile/Profile";
 import AddJob from "../Pages/Dashboard/User/AddJob/AddJob";
+import AppliedJob from "../Pages/Dashboard/User/AppliedJob/AppliedJob";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/addJob",
         element: <AddJob />,
+      },
+      {
+        path: "/dashboard/appliedJob",
+        element: <AppliedJob />,
       },
     ],
   },

@@ -34,12 +34,12 @@ async function run() {
       res.send(user);
     });
     // get all jobs
-    app.get("/jobs", async (req, res) => {
+    app.get("/appliedJobs", async (req, res) => {
       const email = req.query.email;
+      const query = {};
       if(email) {
         query.email = email;
       }  
-      const query = {};
       const jobs = await jobsCollection.find(query).toArray();
       res.send(jobs);
     });
