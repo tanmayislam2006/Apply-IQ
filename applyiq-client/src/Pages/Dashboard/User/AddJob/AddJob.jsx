@@ -3,7 +3,10 @@ import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
+import useAuthProvider from "../../../../Hooks/useAuthProvider";
 // import "react-select/dist/react-select.css"; // Optional: add if you want default styles
+import useAxiosSecure from './../../../../Hooks/useAxiosSecure';
+import { toast } from 'react-hot-toast';
 
 const statusOptions = [
   { value: "wishlist", label: "Wishlist" },
@@ -26,6 +29,8 @@ const resumeOptions = [
 ];
 
 const AddJob = () => {
+const {user}=useAuthProvider()
+const axiosSecure=useAxiosSecure()
   const {
     register,
     handleSubmit,
@@ -34,8 +39,25 @@ const AddJob = () => {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Submitted:", data);
+  const onSubmit =async (data) => {
+    const jobData={
+      ...data,
+      email: user.email,
+      name: user.name,
+    }
+    reset()
+    try {
+      const response = await axiosSecure.post("/appliedJobs", jobData);
+      if (response.data.insertedId) {
+        toast.success ("Job added successfully!");
+      } else {
+        toast.error("Failed to add job.");
+      }
+    } catch (error) {
+      console.error("Error adding job:", error);
+      toast.error("An error occurred while adding the job.");
+    }
+    
   };
 
   return (
@@ -47,7 +69,7 @@ const AddJob = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Top Section */}
-          <div className="grid lg:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             {/* Job Title */}
             <div>
               <label className="label">Job Title</label>
@@ -160,7 +182,7 @@ const AddJob = () => {
             />
           </div>
           {/* Status + Resume  */}
-          <div className="grid lg:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             {/* Status */}
             <div>
               <label className="label">Status</label>
@@ -204,7 +226,7 @@ const AddJob = () => {
           </div>
 
           {/* Description & Notes */}
-          <div className="grid lg:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             {/* Job Description */}
             <div>
               <label className="label">Job Description</label>
@@ -245,7 +267,7 @@ const AddJob = () => {
           </div>
 
           {/* Follow-up Date & Contact */}
-          <div className="grid lg:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             {/* Follow-up Date */}
             <div className="">
               <label className="label">Next Follow-up Date</label>
@@ -258,29 +280,29 @@ const AddJob = () => {
             {/* Contact Person */}
             <div className="">
               <div>
-                <label className="label">Contact Name</label>
+                <label className="label">Contact Name (Recruiter)</label>
                 <input
-                  {...register("contact.name")}
+                  {...register("contactName")}
                   className="input input-bordered w-full"
                 />
               </div>
             </div>
           </div>
           {/* Contact Information */}
-          <div className="grid lg:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="label">Contact Email</label>
+              <label className="label">Contact Email (Recruiter)</label>
               <input
                 type="email"
-                {...register("contact.email")}
+                {...register("contactEmail")}
                 className="input input-bordered w-full"
               />
             </div>
             <div>
-              <label className="label">Contact Phone</label>
+              <label className="label">Contact Phone (Recruiter)</label>
               <input
                 type="tel"
-                {...register("contact.phone")}
+                {...register("contactPhone")}
                 className="input input-bordered w-full"
               />
             </div>

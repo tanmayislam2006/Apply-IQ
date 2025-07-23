@@ -25,12 +25,23 @@ async function run() {
     //  create a connection to the MongoDB cluster
     const ApplyIQ = client.db("ApplyIQ");
     const usersCollection = ApplyIQ.collection("Users");
+    const jobsCollection = ApplyIQ.collection("Jobs");
     // get user information
     app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
       const query = { email: email };
       const user = await usersCollection.findOne(query);
       res.send(user);
+    });
+    // get all jobs
+    app.get("/jobs", async (req, res) => {
+      const email = req.query.email;
+      if(email) {
+        query.email = email;
+      }  
+      const query = {};
+      const jobs = await jobsCollection.find(query).toArray();
+      res.send(jobs);
     });
     // register user data
     app.post("/register", async (req, res) => {
@@ -42,6 +53,12 @@ async function run() {
         return res.status(400).send({ message: "User already exists" });
       }
       const result = await usersCollection.insertOne(user);
+      res.send(result);
+    });
+    // store the user applied jobs
+    app.post("/appliedJobs", async (req, res) => {
+      const jobData = req.body;
+      const result = await jobsCollection.insertOne(jobData);
       res.send(result);
     });
     // Send a ping to confirm a successful connection
