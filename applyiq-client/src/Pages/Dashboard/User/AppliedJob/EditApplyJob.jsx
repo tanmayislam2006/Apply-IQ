@@ -33,12 +33,6 @@ const EditApplyJob = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm();
 
   const { data: jobInfo, isLoading } = useQuery({
     queryKey: ["appliedJobs", id],
@@ -48,6 +42,12 @@ const EditApplyJob = () => {
     },
   });
   console.log(jobInfo);
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
   const { mutate: updateJob } = useMutation({
     mutationFn: async (data) => {
@@ -84,7 +84,7 @@ const EditApplyJob = () => {
               <input
                 {...register("jobTitle", { required: "Job title is required" })}
                 className="input input-bordered w-full"
-                deafaultValue={jobInfo.jobTitle}
+                defaultValue={jobInfo.jobTitle}
               />
               {errors.jobTitle && (
                 <p className="text-red-500 text-sm">
@@ -177,7 +177,7 @@ const EditApplyJob = () => {
             <label className="label">Tags</label>
             <Controller
               name="tags"
-              deafaultValue={jobInfo.tags || []}
+              defaultValue={jobInfo.tags || []}
               control={control}
               render={({ field }) => (
                 <Select
