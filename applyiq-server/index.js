@@ -4,9 +4,13 @@ const cors = require("cors");
 const port = process.env.PORT || 5000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
-app.use(cors({
-  origin: ["http://localhost:5173"],
-}));
+const resumeCheckerRoute = require("./resumeChecker"); // <-- Import the route
+
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+  })
+);
 app.use(express.json());
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.7v7xhww.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
@@ -37,9 +41,9 @@ async function run() {
     app.get("/appliedJobs", async (req, res) => {
       const email = req.query.email;
       const query = {};
-      if(email) {
+      if (email) {
         query.email = email;
-      }  
+      }
       const jobs = await jobsCollection.find(query).toArray();
       res.send(jobs);
     });
@@ -68,6 +72,8 @@ async function run() {
       const result = await jobsCollection.insertOne(jobData);
       res.send(result);
     });
+    // resume checker api
+    app.use("/api", resumeCheckerRoute);
     // update a job with id
     app.patch("/appliedJobs/:id", async (req, res) => {
       const id = req.params.id;

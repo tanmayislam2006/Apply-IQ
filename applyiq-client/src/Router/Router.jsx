@@ -12,6 +12,7 @@ import Profile from "../Pages/Dashboard/User/Profile/Profile";
 import AddJob from "../Pages/Dashboard/User/AddJob/AddJob";
 import AppliedJob from "../Pages/Dashboard/User/AppliedJob/AppliedJob";
 import EditApplyJob from "../Pages/Dashboard/User/AppliedJob/EditApplyJob";
+import ResumeCheck from "../Pages/Dashboard/User/ResumeCheck/ResumeCheck";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/editJob/:id",
         element: <EditApplyJob />,
+      },
+      {
+        path: "/dashboard/resumeCheck",
+        element: <ResumeCheck />,
       },
     ],
   },
