@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaFileUpload, FaPaste } from "react-icons/fa";
 import useAxiosSecure from "./../../../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const ResumeCheck = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -23,7 +24,8 @@ const ResumeCheck = () => {
       setResult(res.data);
       reset();
     } catch (error) {
-      console.error("Resume checker failed", error);
+      console.log(error);
+      toast.error("Vai developer er taka nai");
     } finally {
       setLoading(false);
     }
