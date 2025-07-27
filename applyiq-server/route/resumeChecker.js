@@ -143,7 +143,9 @@ const router = express.Router();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Multer setup
-const upload = multer({ dest: "uploads/" });
+const storage = multer.memoryStorage(); // <--- Store file in memory
+const upload = multer({ storage });     // <--- Use this instead of 'dest'
+
 
 router.post(
   "/resume-checker",
@@ -212,29 +214,27 @@ ${jdText}
 // 📄 Text extraction helper
 async function extractText(file) {
   if (!file) return "";
-  const mimetype = file.mimetype;
 
-  if (mimetype === "application/pdf") {
-    const data = fs.readFileSync(file.path);
-    const parsed = await pdfParse(data);
+  if (file.mimetype === "application/pdf") {
+    const parsed = await pdfParse(file.buffer);
     return parsed.text;
   }
 
   if (
-    mimetype ===
+    file.mimetype ===
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
   ) {
-    const buffer = fs.readFileSync(file.path);
-    const result = await mammoth.extractRawText({ buffer });
+    const result = await mammoth.extractRawText({ buffer: file.buffer });
     return result.value;
   }
 
-  if (mimetype === "text/plain") {
-    return fs.readFileSync(file.path, "utf8");
+  if (file.mimetype === "text/plain") {
+    return file.buffer.toString("utf8");
   }
 
   return "";
 }
+
 
 module.exports = router;
 
