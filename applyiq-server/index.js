@@ -4,7 +4,8 @@ const cors = require("cors");
 const port = process.env.PORT || 5000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
-const resumeCheckerRoute = require("./resumeChecker"); // <-- Import the route
+const resumeCheckerRoute = require("./route/resumeChecker"); // <-- Import the route
+const calendarRoutes = require("./route/calendarRoutes");
 
 app.use(
   cors({
@@ -74,6 +75,8 @@ async function run() {
     });
     // resume checker api
     app.use("/api", resumeCheckerRoute);
+    // calendr api
+    app.use("/api", calendarRoutes);
     // update a job with id
     app.patch("/appliedJobs/:id", async (req, res) => {
       const id = req.params.id;
