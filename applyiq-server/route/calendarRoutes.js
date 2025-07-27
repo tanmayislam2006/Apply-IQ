@@ -23,34 +23,32 @@ router.get("/google-calendar/auth", (req, res) => {
     access_type: "offline", // Needed to get refresh token
     scope: SCOPES,
   });
-  console.log(authUrl);
+  console.log("Generated auth URL:", authUrl);
   res.send({ url: authUrl });
 });
 
 // ===== 3. HANDLE CALLBACK =====
 // After the user approves access, Google redirects here
 // Route: GET /api/calendar/callback?code=xxxxxx
-router.get("/calendar/callback", async (req, res) => {
+router.get("/google-calendar/callback", async (req, res) => {
   const code = req.query.code;
 
   try {
+    // get use acces token and refresh token
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
-
     // You can store tokens in session or send them to frontend via redirect:
     const query = new URLSearchParams({
       access_token: tokens.access_token,
-      refresh_token: tokens.refresh_token
+      refresh_token: tokens.refresh_token,
     }).toString();
-
     // ✅ Redirect back to frontend after successful auth
-    // res.redirect(`http://localhost:5173/dashboard/calendar-success?${query}`);
+    res.redirect(`http://localhost:5173/dashboard/calendar-success?${query}`);
   } catch (error) {
     console.error("Error exchanging code for token", error);
     res.redirect("http://localhost:5173/dashboard/calendar-error");
   }
 });
-
 
 // ===== 4. CREATE CALENDAR EVENT =====
 // Route: POST /api/calendar/event

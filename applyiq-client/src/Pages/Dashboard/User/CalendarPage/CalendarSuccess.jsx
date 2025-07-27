@@ -1,7 +1,9 @@
 import { useSearchParams } from "react-router";
 
 const CalendarSuccess = () => {
+
   const [params] = useSearchParams();
+  console.log(params);
   const token = params.get("access_token");
 
   return (
