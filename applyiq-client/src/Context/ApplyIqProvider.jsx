@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 
 import useUserProfile from "../Hooks/useUserProfile";
-import auth from "../Firebase/Firebase.init.js";
+import {auth} from "../Firebase/Firebase.init.js";
 
 
 const googleProvider = new GoogleAuthProvider();

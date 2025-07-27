@@ -9,6 +9,7 @@ import {
   FaClipboardCheck,
   FaBrain,
   FaCalendar,
+  FaComments,
 } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import classNames from "classnames";
@@ -25,6 +26,7 @@ const Sidebar = ({ isMobileOpen, setIsMobileOpen }) => {
     { path: "/dashboard/appliedJob", label: "Applied Jobs", icon: <FaClipboardCheck /> },
     { path: "/dashboard/resumeCheck", label: "Check Your Resume", icon: <FaBrain /> },
     { path: "/dashboard/calendar", label: "Calendar", icon: <FaCalendar /> },
+    { path: "/dashboard/chat", label: "Chat", icon: <FaComments /> },
   ];
 
   const linkBaseStyle =
