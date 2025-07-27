@@ -13,6 +13,8 @@ import AddJob from "../Pages/Dashboard/User/AddJob/AddJob";
 import AppliedJob from "../Pages/Dashboard/User/AppliedJob/AppliedJob";
 import EditApplyJob from "../Pages/Dashboard/User/AppliedJob/EditApplyJob";
 import ResumeCheck from "../Pages/Dashboard/User/ResumeCheck/ResumeCheck";
+import CalendarPage from "../Pages/Dashboard/User/CalendarPage/CalendarPage";
+import CalendarSuccess from "../Pages/Dashboard/User/CalendarPage/CalendarSuccess";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +76,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/resumeCheck",
         element: <ResumeCheck />,
+      },
+      {
+        path: "/dashboard/calendar",
+        element: <CalendarPage />,
+      },
+      {
+        path: "/dashboard/calendar-success",
+        element: <CalendarSuccess />,
       },
     ],
   },
